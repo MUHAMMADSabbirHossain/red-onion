@@ -5,8 +5,9 @@ const NavigationBar = () => {
     return (
 
         <nav>
-            navigation bar
+            nav
         </nav>
+
     );
 };
 
