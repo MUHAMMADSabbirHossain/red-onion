@@ -52,8 +52,6 @@ const NavigationBar = () => {
                                     <div className="flex space-x-4">
                                         {navigation.map((item) => (
 
-
-
                                             <a
                                                 key={item.name}
                                                 /* href={item.href} */
@@ -141,6 +139,8 @@ const NavigationBar = () => {
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
+
+
                             </div>
                         </div>
                     </div>
