@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import "./SignIn.css";
 import { Button, Card, Checkbox, Input, Typography } from '@material-tailwind/react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
@@ -17,6 +17,8 @@ const SignIn = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
 
 
     if (loading) {
@@ -88,6 +90,10 @@ const SignIn = () => {
                         <a href="#" className="font-medium text-gray-900">
                             <Link to="/signup">Sign Up</Link>
                         </a>
+                    </Typography>
+
+                    <Typography color="gray" className="mt-4 text-center font-normal">Forget your password?{" "}
+                        <a onClick={() => sendPasswordResetEmail(email)} href="#" className="font-medium text-gray-900">Reset account</a>
                     </Typography>
                 </form>
             </Card>
