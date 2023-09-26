@@ -9,7 +9,7 @@ const RequireAuth = ({ children }) => {
     const navigate = useNavigate();
     const [user, loading, error] = useAuthState(auth);
     if (!user) {
-        return navigate("/login");
+        return navigate("/signin");
     }
     return children;
 };
