@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import "./Meals.css";
-import { Link } from 'react-router-dom';
 import Breakfast from '../Breakfast/Breakfast';
 import Lunch from '../Lunch/Lunch';
 import Dinner from '../Dinner/Dinner';
