@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import "./SignUp.css";
 import { Button, Card, Checkbox, Input, Typography } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
 
 const SignUp = () => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const navigate = useNavigate();
+
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
 
 
     const handleNameInput = event => {
@@ -24,8 +34,17 @@ const SignUp = () => {
         setPassword(event.target.value);
     };
 
+    if (user) {
+        navigate("/");
+    }
+
     const handleFormSubmit = event => {
         console.log(name, email, password);
+        if (email === "" || password === "") {
+
+        }
+
+        createUserWithEmailAndPassword(email, password);
     };
 
 
@@ -45,8 +64,8 @@ const SignUp = () => {
                 <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 mx-auto">
                     <div className="mb-4 flex flex-col gap-6">
                         <Input onBlur={handleNameInput} size="lg" label="Name" />
-                        <Input onBlur={handleEmailInput} size="lg" label="Email" />
-                        <Input onBlur={handlePasswordInput} type="password" size="lg" label="Password" />
+                        <Input onBlur={handleEmailInput} size="lg" label="Email" required />
+                        <Input onBlur={handlePasswordInput} type="password" size="lg" label="Password" required />
                     </div>
                     <Checkbox
                         label={
@@ -66,6 +85,11 @@ const SignUp = () => {
                         }
                         containerProps={{ className: "-ml-2.5" }}
                     />
+
+                    {
+                        error && <p className=' text-red'>{error.message}</p>
+                    }
+
                     <Button onClick={handleFormSubmit} className="mt-6" fullWidth>
                         Register
                     </Button>
