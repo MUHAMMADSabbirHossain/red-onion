@@ -9,6 +9,8 @@ import SignOut from './Components/SignOut/SignOut';
 import NavigationBar from './Components/NavigationBar/NavigationBar';
 import About from './Components/About/About';
 import SignUp from './Components/SignUP/SignUp';
+import UserProfile from './Components/UserProfile/UserProfile';
+import RequireAuth from './Components/RequireAuth/RequireAuth';
 
 function App() {
   return (
@@ -36,7 +38,7 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/about" element={<About></About>}></Route>
-        <Route path="userprofile" ></Route>
+        <Route path="userprofile" element={<RequireAuth><UserProfile></UserProfile></RequireAuth>} ></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path="/signin" element={<SignIn></SignIn>}></Route>
         <Route path="/signout" element={<SignOut></SignOut>}></Route>
