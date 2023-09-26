@@ -4,6 +4,7 @@ import { Button, Card, Checkbox, Input, Typography } from '@material-tailwind/re
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { Link, useNavigate } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 const SignIn = () => {
 
@@ -18,6 +19,9 @@ const SignIn = () => {
     ] = useSignInWithEmailAndPassword(auth);
 
 
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     if (user) {
         navigation("/");
