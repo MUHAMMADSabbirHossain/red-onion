@@ -1,11 +1,15 @@
 import React from 'react';
 import "./Header.css";
+import Banner from '../Banner/Banner';
 
 const Header = () => {
     return (
-        <div>
+        <header>
             header
-        </div>
+            <section>
+                <Banner></Banner>
+            </section>
+        </header>
     );
 };
 

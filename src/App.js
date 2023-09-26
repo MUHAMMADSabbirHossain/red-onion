@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer';
 import Home from './Components/Home/Home';
 import SignIn from './Components/SignIn/SignIn';
 import SignOut from './Components/SignOut/SignOut';
+import NavigationBar from './Components/NavigationBar/NavigationBar';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
         </a>
       </header> */}
 
-
+      {/* navigation bar */}
+      <NavigationBar></NavigationBar>
 
       {/* react router */}
       <Routes>

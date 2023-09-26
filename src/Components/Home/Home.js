@@ -1,11 +1,14 @@
 import React from 'react';
 import "./Home.css";
+import Header from '../Header/Header';
 
 const Home = () => {
     return (
-        <div>
+
+        <section>
             home
-        </div>
+            <Header></Header>
+        </section>
     );
 };
 
