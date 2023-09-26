@@ -62,9 +62,9 @@ const NavigationBar = () => {
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
                                                 <Link to={`/${(item.name).toLowerCase()}`}>{item.name}</Link>
-                                                {
+                                                {/* {
                                                     console.log((item.name).toLowerCase())
-                                                }
+                                                } */}
                                             </a>
 
 
