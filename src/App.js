@@ -1,5 +1,11 @@
 // import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import NotFound from './Components/NotFound/NotFound';
+import Footer from './Components/Footer/Footer';
+import Home from './Components/Home/Home';
+import SignIn from './Components/SignIn/SignIn';
+import SignOut from './Components/SignOut/SignOut';
 
 function App() {
   return (
@@ -18,6 +24,20 @@ function App() {
           Learn React
         </a>
       </header> */}
+
+
+
+      {/* react router */}
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
+        <Route path="/signin" element={<SignIn></SignIn>}></Route>
+        <Route path="/signout" element={<SignOut></SignOut>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
+      </Routes>
+
+      {/* footer */}
+      <Footer></Footer>
     </div>
   );
 }
