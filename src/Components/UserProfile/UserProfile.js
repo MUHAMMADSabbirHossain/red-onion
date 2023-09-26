@@ -15,6 +15,8 @@ const UserProfile = () => {
             {
                 user && <Typography color="gray" className="text-5xl mt-4 text-center font-normal">{user.email}
                     <br />
+                    <p>{user.displayName}</p>
+                    <br />
                     <p>Last Refresh At: {user.reloadUserInfo.lastRefreshAt}</p></Typography>
             }
         </div>

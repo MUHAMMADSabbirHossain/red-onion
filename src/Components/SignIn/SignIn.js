@@ -52,8 +52,8 @@ const SignIn = () => {
                 </Typography>
                 <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 mx-auto">
                     <div className="mb-4 flex flex-col gap-6">
-                        <Input onBlur={handleEmailInput} size="lg" label="Email" />
-                        <Input onBlur={handlePasswordInput} type="password" size="lg" label="Password" />
+                        <Input onBlur={handleEmailInput} size="lg" label="Email" required />
+                        <Input onBlur={handlePasswordInput} type="password" size="lg" label="Password" required />
                     </div>
 
 

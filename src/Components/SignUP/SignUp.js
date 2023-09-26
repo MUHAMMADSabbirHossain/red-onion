@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import "./SignUp.css";
 import { Button, Card, Checkbox, Input, Typography } from '@material-tailwind/react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSendPasswordResetEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from "../../firebase.init";
+import Loading from '../Loading/Loading';
 
 const SignUp = () => {
 
@@ -17,7 +18,17 @@ const SignUp = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
+
+    const [sendEmailVerification, verificationSending, verificationError] = useSendEmailVerification(auth);
+
+    const [updateProfile, updating, UpdateProfileError] = useUpdateProfile(auth);
+
+    if (loading || sending || verificationSending) {
+        return <Loading></Loading>
+    }
 
 
     const handleNameInput = event => {
@@ -38,13 +49,15 @@ const SignUp = () => {
         navigate("/");
     }
 
-    const handleFormSubmit = event => {
+    const handleFormSubmit = async event => {
         console.log(name, email, password);
-        if (email === "" || password === "") {
+        // if (email === "" || password === "") {
+        //     return;
+        // }
 
-        }
-
-        createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(email, password);
+        // sendEmailVerification(email);
+        await updateProfile({ displayName: name })
     };
 
 
@@ -87,7 +100,13 @@ const SignUp = () => {
                     />
 
                     {
-                        error && <p className=' text-red'>{error.message}</p>
+                        error && <p className=' text-red'>Please try again => {error.message}</p>
+                    }
+                    {/* {
+                        resetError && <p className=' text-red'> Pleaser try again => {resetError.message}</p>
+                    } */}
+                    {
+                        verificationError && <p className=' text-red'> Pleaser try again => {verificationError.message}</p>
                     }
 
                     <Button onClick={handleFormSubmit} className="mt-6" fullWidth>
@@ -98,6 +117,10 @@ const SignUp = () => {
                         <a href="#" className="font-medium text-gray-900">
                             <Link to="/signin">Sign In</Link>
                         </a>
+                    </Typography>
+
+                    <Typography color="gray" className="mt-4 text-center font-normal">Forget your password?{" "}
+                        <a onClick={() => sendPasswordResetEmail(email)} href="#" className="font-medium text-gray-900">Reset account</a>
                     </Typography>
                 </form>
             </Card>
