@@ -11,6 +11,7 @@ const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const [terms, setTerms] = useState(false);
     const navigate = useNavigate();
 
     const [
@@ -44,6 +45,8 @@ const SignUp = () => {
     const handlePasswordInput = event => {
         setPassword(event.target.value);
     };
+
+
 
     if (user) {
         navigate("/");
@@ -80,19 +83,20 @@ const SignUp = () => {
                         <Input onBlur={handleEmailInput} size="lg" label="Email" required />
                         <Input onBlur={handlePasswordInput} type="password" size="lg" label="Password" required />
                     </div>
-                    <Checkbox
+                    <Checkbox onClick={() => setTerms(!terms)}
                         label={
                             <Typography
                                 variant="small"
                                 color="gray"
-                                className="flex items-center font-normal"
+                                // className="flex items-center font-normal"
+                                className={`flex items-center font-normal ${terms ? "" : "text-red"}`}
                             >
                                 I agree the
                                 <a
                                     href="#"
                                     className="font-medium transition-colors hover:text-gray-900"
                                 >
-                                    &nbsp;Terms and Conditions
+                                    &nbsp;All Terms and Conditions
                                 </a>
                             </Typography>
                         }
@@ -109,7 +113,7 @@ const SignUp = () => {
                         verificationError && <p className=' text-red'> Pleaser try again => {verificationError.message}</p>
                     }
 
-                    <Button onClick={handleFormSubmit} className="mt-6" fullWidth>
+                    <Button onClick={handleFormSubmit} disabled={!terms} className="mt-6" fullWidth>
                         Register
                     </Button>
                     <Typography color="gray" className="mt-4 text-center font-normal">
